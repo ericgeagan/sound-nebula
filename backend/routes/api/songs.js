@@ -20,4 +20,11 @@ const validateSong = [
 ]
 
 // Create route
-router.post('/',)
+router.post(
+	'/', 
+	validateSong, 
+	asyncHandler(async (req, res) => {
+		// get userid and add it to the obj?
+		const id = await Song.create(req.body)
+		return res.redirect(`${req.baseUrl}/${id}`)
+}))
