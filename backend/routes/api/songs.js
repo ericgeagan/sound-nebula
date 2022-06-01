@@ -2,7 +2,7 @@ const express = require('express')
 const asyncHandler = require('express-async-handler')
 
 const { requireAuth } = require('../../utils/auth')
-const { Song } = require('../../db/models')
+const { Song, Comment } = require('../../db/models')
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
@@ -19,7 +19,7 @@ const validateSong = [
 	handleValidationErrors
 ]
 
-// Create route
+// Create song route
 router.post(
 	'/', 
 	validateSong, 
@@ -42,11 +42,31 @@ router.get(
 router.get(
 	'/:id',
 	asyncHandler(async (req, res) => {
-		const song = await Song.one(req,params.id)
+		const song = await Song.one(req.params.id)
 		return res.json(song)
 }))
 
-// Update route
+// Get all song's comments
+router.get(
+	'/:id/comments', 
+	asyncHandler(async (req, res) => {
+		const comments = await Comment.findAll({
+			where: {
+				songId: req.params.id
+			}
+		})
+		return res.json(comments)
+}))
+
+// Add comment to song
+router.post(
+	'/:id/comments', 
+	asyncHandler(async (req, res) => {
+		const id = await Comment.create(req.body)
+		return res.redirect(`${req.baseUrl}/${id}`);
+}))
+
+// Update song route
 router.put(
 	'/:id', 
 	validateSong, 
@@ -63,3 +83,5 @@ router.put(
 			})
 		return id
 }))
+
+module.exports = router;
