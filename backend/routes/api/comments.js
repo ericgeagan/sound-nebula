@@ -14,11 +14,3 @@ const validateComment = [
 		.withMessage('Please provide valid text.'),
 	handleValidationErrors
 ]
-
-// Create Comment Route
-router.post(
-	'/', 
-	asyncHandler(async (req, res) => {
-		const id = await Comment.create(req.body)
-		return res.redirect(`${req.baseUrl}/${id}`);
-}))

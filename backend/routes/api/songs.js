@@ -34,7 +34,7 @@ router.get(
 	'/', 
 	asyncHandler(async (req, res) => {
 		// Can change this to first X songs later
-		const songs = await Songs.findAll()
+		const songs = await Song.findAll()
 		return res.json(songs)
 }))
 
@@ -42,7 +42,7 @@ router.get(
 router.get(
 	'/:id',
 	asyncHandler(async (req, res) => {
-		const song = await Song.one(req.params.id)
+		const song = await Song.findByPk(req.params.id)
 		return res.json(song)
 }))
 
