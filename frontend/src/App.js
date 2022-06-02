@@ -26,7 +26,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/song/:songId">
+          <Route path="/songs/:songId">
             <SongDetail />
           </Route>
           <Route path="/upload">

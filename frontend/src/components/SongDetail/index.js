@@ -8,12 +8,24 @@ const SongDetail = () => {
 	const { songId } = useParams()
 	const song = useSelector(state => state.song[songId])
 
-	// if (!song) {
-	// 	return null
-	// }
+	const dispatch = useDispatch()
+
+	useEffect(() => {
+		dispatch(getSong())
+	}, [dispatch])
+
+	if (!song) {
+		return null
+	}
 
 	return (
 		<>
+			<img src={song.imageUrl}></img>
+			<h3>{song.title}</h3>
+			<p>{song.body}</p>
+			<div>Likes: {song.likes}</div>
+			<button>Edit</button>
+			<button>Delete</button>
 		</>
 	)
 }

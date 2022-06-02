@@ -24,10 +24,7 @@ const SongList = () => {
 		<>
 			{songs.map(song => {
 				return (
-					<div key={song.id}>
-						<SongCard song={song}/>
-						<div>{song.title}</div>
-					</div>
+					<SongCard key={song.id} song={song}/>
 				)
 			})}
 		</>

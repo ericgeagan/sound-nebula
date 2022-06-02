@@ -2,6 +2,8 @@ import { csrfFetch } from './csrf';
 
 const LOAD = 'songs/LOAD'
 const ADD_ONE = 'songs/ADD_ONE'
+const UPDATE = 'songs/UPDATE'
+const DELETE = 'songs/DELETE'
 
 const load = list => ({
 	type: LOAD,
