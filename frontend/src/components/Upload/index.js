@@ -25,9 +25,9 @@ const Upload = () => {
 			likes: 0,
 		}
 		let createdSong = await dispatch(createSong(payload))
-		console.log(createdSong)
 		if (createdSong) {
-			history.push(`/songs/${createdSong.id}`)
+			// history.push(`/songs/${createdSong.id}`)
+			history.push('/')
 		}
 	}
 	return (
