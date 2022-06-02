@@ -6,6 +6,7 @@ import SongDetail from './components/SongDetail'
 import Upload from "./components/Upload";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
+import SongList from "./components/SongList";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,9 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
+          <Route exact path="/">
+            <SongList />
+          </Route>
           <Route path="/signup">
             <SignupFormPage />
           </Route>
