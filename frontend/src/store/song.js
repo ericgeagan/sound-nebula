@@ -14,7 +14,7 @@ const addOneSong = song => ({
 })
 
 export const getSong = () => async dispatch => {
-	const response = await fetch(`/api/songs`)
+	const response = await csrfFetch(`/api/songs`)
 
 	if (response.ok) {
 		const list = await response.json()
@@ -23,7 +23,7 @@ export const getSong = () => async dispatch => {
 }
 
 export const getOneSong = (songId) => async dispatch => {
-	const response = await fetch(`/api/songs/${songId}`)
+	const response = await csrfFetch(`/api/songs/${songId}`)
 
 	if (response.ok) {
 		const singleSong = await response.json()
@@ -46,7 +46,7 @@ export const createSong = (payload) => async (dispatch) => {
 }
 
 export const editSong = (payload) => async (dispatch) => {
-	const response = await fetch(`/api/songs/${payload.id}`, {
+	const response = await csrfFetch(`/api/songs/${payload.id}`, {
 		method: 'PUT',
 		headers: { 'Content-Type': 'application/json' },
 		body: JSON.stringify(payload)
@@ -76,22 +76,22 @@ const songReducer = (state = initialState, action) => {
 				list: action.list
 			}
 		case ADD_ONE:
-			if (!state[action.song.id]) {
-				const newState = {
-					...state,
-					[action.song.id]: action.song
-				}
-				const songList = newState.list.map(id => newState[id])
-				songList.push(action.song)
-				return newState
-			}
-			return {
+			const newState = {
 				...state,
-				[action.song.id]: {
-					...state[action.song.id],
-					...action.song
-				}
+				[action.song.id]: action.song,
+				list: [...state.list, action.song]
 			}
+			// const songList = newState.list.map(id => newState[id])
+			// songList.push(action.song)
+			// songList = [...songList, action.song]
+			return newState
+			// return {
+			// 	...state,
+			// 	[action.song.id]: {
+			// 		...state[action.song.id],
+			// 		...action.song
+			// 	}
+			// }
 		default:
 			return state
 	}

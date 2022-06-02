@@ -22,7 +22,7 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/songdetail">
+          <Route path="/song/:songId">
             <SongDetail />
           </Route>
           <Route path="/upload">

@@ -25,8 +25,10 @@ router.post(
 	validateSong, 
 	asyncHandler(async (req, res) => {
 		// get userid and add it to the obj?
-		const id = await Song.create(req.body)
-		return res.redirect(`${req.baseUrl}/${id}`)
+		const song = await Song.create(req.body)
+		// console.log('here', req.baseUrl, id)
+		// return res.redirect(`${req.baseUrl}/${song.dataValues.id}`)
+		// return res.redirect(`/`)
 }))
 
 // Read route (get all songs)

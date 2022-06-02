@@ -26,8 +26,8 @@ const Upload = () => {
 		}
 		let createdSong = await dispatch(createSong(payload))
 		if (createdSong) {
-			// history.push(`/songs/${createdSong.id}`)
-			history.push('/')
+			history.push(`/songs/${createdSong.id}`)
+			// history.push('/')
 		}
 	}
 	return (
