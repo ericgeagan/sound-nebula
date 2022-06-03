@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './SongDetail.css';
-import { deleteSong, getSong } from "../../store/song";
+import { deleteSong, getComments, getSong } from "../../store/song";
 import { Link, useHistory, useParams } from "react-router-dom";
-
+import CommentList from "../CommentList";
 
 const SongDetail = () => {
 	const { songId } = useParams()
-	const userId = useSelector((state)=> state.session.user.id)
+	const userId = useSelector(state=> state.session.user.id)
 	const song = useSelector(state => state.song[songId])
+	const comments = useSelector(state => state.song[songId]?.comments)
 	const history = useHistory()
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(getSong())
+		dispatch(getComments(songId))
 	}, [dispatch])
 
 	const handleDelete = async (e) => {
@@ -44,6 +46,7 @@ const SongDetail = () => {
 			<div>Likes: {song.likes}</div>
 			{userId === song.userId ? <button onClick={handleEdit}>Edit</button> : null}
 			{userId === song.userId ? <button onClick={handleDelete}>Delete</button> : null}
+			<CommentList comments={comments} />
 		</>
 	)
 }

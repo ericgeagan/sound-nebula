@@ -4,6 +4,10 @@ const LOAD = 'songs/LOAD'
 const ADD_ONE = 'songs/ADD_ONE'
 const UPDATE = 'songs/UPDATE'
 const REMOVE = 'songs/REMOVE'
+const LOAD_COMMENTS = 'comments/LOAD_COMMENTS'
+const ADD_COMMENT = 'comments/ADD_COMMENT'
+const UPDATE_COMMENT = 'comments/UPDATE_COMMENT'
+const REMOVE_COMMENT = 'comments/REMOVE_COMMENT'
 
 const load = list => ({
 	type: LOAD,
@@ -25,12 +29,27 @@ const remove = (songId) => ({
 	songId
 })
 
+const loadComments = (list, songId) => ({
+	type: LOAD_COMMENTS,
+	list,
+	songId
+})
+
 export const getSong = () => async dispatch => {
 	const response = await csrfFetch(`/api/songs`)
 
 	if (response.ok) {
 		const list = await response.json()
 		dispatch(load(list))
+	}
+}
+
+export const getComments = (songId) => async dispatch => {
+	const response = await csrfFetch(`/api/songs/${songId}/comments`)
+
+	if (response.ok) {
+		const comments = await response.json()
+		dispatch(loadComments(comments, songId))
 	}
 }
 
@@ -119,10 +138,18 @@ const songReducer = (state = initialState, action) => {
 		case UPDATE:
 			const updatedState = {
 				...state,
-				[action.song.id]: action.song,
-				list: [...state.list.filter(song => song.id !== action.song.id), action.song]
 			}
+			updatedState[action.song.id] = action.song
+			updatedState.list = [...state.list.filter(song => song.id !== action.song.id), action.song]
 			return updatedState
+		case LOAD_COMMENTS:
+			return {
+				...state,
+				[action.songId]: {
+					...state[action.songId],
+					comments: action.list.map(comment => comment)
+				},
+			}
 		default:
 			return state
 	}
