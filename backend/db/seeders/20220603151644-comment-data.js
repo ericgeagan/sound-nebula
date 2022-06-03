@@ -12,14 +12,10 @@ module.exports = {
         isBetaMember: false
       }], {});
     */
-    return queryInterface.bulkInsert('Songs', [{
+    return queryInterface.bulkInsert('Comments', [{
       userId: 1,
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/No-album-art.png?20160131100336',
-      url: 'https://cloudify.s3.us-west-2.amazonaws.com/2ef37c13d6fc439eb2beb243fb7fa4cf.mp3',
-      title: 'Doin it Right',
-      genre: 'EDM',
-      likes: 10,
-      body: 'Written and performed by French electronic music duo Daft Punk and American musician Panda Bear of the band Animal Collective.',
+      songId: 1,
+      body: 'Amazing song, listened to this ever since high school.',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});
@@ -33,9 +29,5 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
-    const Op = Sequelize.Op;
-    return queryInterface.bulkDelete('Songs', {
-      title: { [Op.in]: ['Doin it Right'] }
-    }, {});
   }
 };
