@@ -23,12 +23,14 @@ const validateSong = [
 router.post(
 	'/', 
 	validateSong, 
+	requireAuth,
 	asyncHandler(async (req, res) => {
 		// get userid and add it to the obj?
 		const song = await Song.create(req.body)
 		// console.log('here', req.baseUrl, id)
 		// return res.redirect(`${req.baseUrl}/${song.dataValues.id}`)
 		// return res.redirect(`/`)
+		return res.json(song)
 }))
 
 // Read route (get all songs)
@@ -63,6 +65,7 @@ router.get(
 // Add comment to song
 router.post(
 	'/:id/comments', 
+	requireAuth,
 	asyncHandler(async (req, res) => {
 		const id = await Comment.create(req.body)
 		return res.redirect(`${req.baseUrl}/${id}`);
@@ -72,23 +75,25 @@ router.post(
 router.put(
 	'/:id', 
 	validateSong, 
+	requireAuth,
 	asyncHandler(async (req, res) => {
 		const song = req.body
-		const id = song.id
+		const id = req.params.id
 		delete song.id
-		await Song.update(
+		const updatedSong = await Song.update(
 			song, 
 			{
 				where: { id },
-				returning: true,
-				plain: true
+				// returning: true,
+				// plain: true
 			})
-		return id
+		return res.json(updatedSong)
 }))
 
 // Delete song route
 router.delete(
 	'/:id', 
+	requireAuth,
 	asyncHandler(async (req, res) => {
 		const songId = parseInt(req.params.id)
 		const song = await Song.findByPk(songId)

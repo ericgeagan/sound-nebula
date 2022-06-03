@@ -7,6 +7,7 @@ import Upload from "./components/Upload";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SongList from "./components/SongList";
+import SongDetailEdit from "./components/SongDetailEdit";
 
 function App() {
   const dispatch = useDispatch();
@@ -26,8 +27,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/songs/:songId">
+          <Route exact path="/songs/:songId">
             <SongDetail />
+          </Route>
+          <Route path="/songs/:songId/edit">
+            <SongDetailEdit />
           </Route>
           <Route path="/upload">
             <Upload />

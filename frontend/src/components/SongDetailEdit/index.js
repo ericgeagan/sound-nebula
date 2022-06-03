@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import './Upload.css';
-import { createSong } from "../../store/song";
-import { useHistory } from "react-router-dom";
+import '../Upload/Upload.css';
+import { editSong } from "../../store/song";
+import { useHistory, useParams } from "react-router-dom";
 
-const Upload = () => {
+const SongDetailEdit = () => {
+	const { songId } = useParams()
 	const dispatch = useDispatch()
 	const history = useHistory()
-	const [imageUrl, setImageUrl] = useState('')
-	const [url, setUrl] = useState('')
-	const [title, setTitle] = useState('')
-	const [description, setDescription] = useState('')
 	const userId = useSelector((state)=> state.session.user.id)
+	const song = useSelector(state => state.song[songId])
+	const [imageUrl, setImageUrl] = useState(song.imageUrl || '')
+	const [url, setUrl] = useState(song.url || '')
+	const [title, setTitle] = useState(song.title || '')
+	const [description, setDescription] = useState(song.body || '')
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -24,12 +26,18 @@ const Upload = () => {
 			genre: 'EDM',
 			likes: 0,
 		}
-		let createdSong = await dispatch(createSong(payload))
-		if (createdSong) {
-			history.push(`/songs/${createdSong.id}`)
+		let song = await dispatch(editSong(payload, songId))
+		if (song) {
+			history.push(`/songs/${songId}`)
 			// history.push('/')
 		}
 	}
+
+	// If incorrect user, render unauthorized
+	if (song.userId !== userId) {
+		return null
+	}
+
 	return (
 		<>
 			<h1>Add new song</h1>
@@ -60,4 +68,4 @@ const Upload = () => {
 	)
 }
 
-export default Upload
+export default SongDetailEdit
