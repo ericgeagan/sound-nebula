@@ -47,6 +47,12 @@ const updateComment = (comment, songId) => ({
 	songId
 })
 
+const removeComment = (commentId, songId) => ({
+	type: REMOVE_COMMENT,
+	commentId,
+	songId
+})
+
 export const getSong = () => async dispatch => {
 	const response = await csrfFetch(`/api/songs`)
 
@@ -93,14 +99,14 @@ export const editComment = (payload, commentId) => async dispatch => {
 	}
 }
 
-export const deleteComment = ({userId, songId}) => async (dispatch) => {
-	const response = await csrfFetch(`/api/songs/${songId}`, {
+export const deleteComment = ({userId, songId, commentId}) => async (dispatch) => {
+	const response = await csrfFetch(`/api/songs/${songId}/comments/${commentId}`, {
 		method: 'DELETE'
 	})
 
 	if (response.ok) {
 		const data = await response.json()
-		dispatch(remove(songId))
+		dispatch(removeComment(commentId, songId))
 		return data
 	}
 }
@@ -218,19 +224,33 @@ const songReducer = (state = initialState, action) => {
 			let oldComments = [...state[action.songId]?.comments] || []
 			// console.log(oldComments, action.songId)
 			// console.log('reducer', action.comment, action.songId)
-			console.log('1st oldcomments', oldComments)
+			// console.log('1st oldcomments', oldComments)
 			if (oldComments?.length) {
 				// console.log('is it getting here?', oldComments)
 				let index = oldComments.findIndex(comment => comment.id === action.comment.id)
 				oldComments.splice(index, 1, action.comment)
 				// console.log('after filter', oldComments)
 			}
-			console.log('2nd oldcomm', oldComments)
+			// console.log('2nd oldcomm', oldComments)
 			editCommentState[action.songId] = {
 				...state[action.songId],
 				comments: [...oldComments]
 			}
 			return editCommentState
+		case REMOVE_COMMENT:
+			const removeCommentState = {
+				...state
+			}
+			let prevComments = [...state[action.songId]?.comments] || []
+			if (prevComments?.length) {
+				let index = prevComments.findIndex(comment => comment.id === action.commentId)
+				prevComments.splice(index, 1)
+			}
+			removeCommentState[action.songId] = {
+				...state[action.songId],
+				comments: [...prevComments]
+			}
+			return removeCommentState
 		default:
 			return state
 	}

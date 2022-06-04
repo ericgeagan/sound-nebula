@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import './CommentBox.css';
-import { editComment } from "../../store/song";
+import { editComment, deleteComment } from "../../store/song";
 
 const CommentBox = ({ comment }) => {
 	const dispatch = useDispatch()
@@ -29,6 +29,16 @@ const CommentBox = ({ comment }) => {
 		setShowForm(!showForm)
 	}
 
+	const handleDelete = async (e) => {
+		e.preventDefault()
+		const payload = {
+			userId,
+			songId: comment.songId,
+			commentId: comment.id
+		}
+		await dispatch(deleteComment(payload))
+	}
+
 	if(!comment) {
 		return null
 	}
@@ -53,7 +63,7 @@ const CommentBox = ({ comment }) => {
 							<div>{comment.body}</div>
 							<div>{comment.userId}</div>
 							{userId === comment.userId ? <button onClick={openEdit}>Edit</button> : null}
-							{userId === comment.userId ? <button>Delete</button> : null}
+							{userId === comment.userId ? <button onClick={handleDelete}>Delete</button> : null}
 						</div>
 				}
 

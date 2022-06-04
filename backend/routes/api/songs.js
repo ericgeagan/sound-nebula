@@ -98,7 +98,15 @@ router.delete(
 	'/:songId/comments/:commentId',
 	requireAuth,
 	asyncHandler(async (req, res) => {
-		
+		const songId = parseInt(req.params.songId)
+		const commentId = parseInt(req.params.commentId)
+		const comment = await Comment.findByPk(commentId)
+		if (comment) {
+			comment.destroy()
+			res.json({ "message": "Delete Successful" })
+		} else {
+			res.json({ "message": "Delete Failed"})
+		}
 	})
 )
 
