@@ -203,17 +203,20 @@ const songReducer = (state = initialState, action) => {
 			const editCommentState = {
 				...state,
 			}
-			let oldComments = state[action.songId]?.comments || []
+			let oldComments = [...state[action.songId]?.comments] || []
 			// console.log(oldComments, action.songId)
 			// console.log('reducer', action.comment, action.songId)
+			console.log('1st oldcomments', oldComments)
 			if (oldComments?.length) {
 				// console.log('is it getting here?', oldComments)
-				oldComments = oldComments.filter(comment => comment.id !== action.comment.id)
+				let index = oldComments.findIndex(comment => comment.id === action.comment.id)
+				oldComments.splice(index, 1, action.comment)
 				// console.log('after filter', oldComments)
 			}
+			console.log('2nd oldcomm', oldComments)
 			editCommentState[action.songId] = {
 				...state[action.songId],
-				comments: [...oldComments, action.comment]
+				comments: [...oldComments]
 			}
 			return editCommentState
 		default:

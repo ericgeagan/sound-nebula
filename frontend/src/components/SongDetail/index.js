@@ -50,7 +50,7 @@ const SongDetail = () => {
 			{userId === song.userId ? <button onClick={handleDelete}>Delete</button> : null}
 			<CommentForm songId={songId}/>
 			{comments?.map(comment => (
-				<CommentBox comment={comment}/>
+				<CommentBox key={comment.id} comment={comment}/>
 			))}
 		</>
 	)

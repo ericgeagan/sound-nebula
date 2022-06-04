@@ -73,6 +73,7 @@ router.post(
 		return res.json(id)
 }))
 
+// Update comment route
 router.put(
 	'/:songId/comments/:commentId',
 	requireAuth,
@@ -89,6 +90,15 @@ router.put(
 		)
 		// console.log("ANYTING FORM HERE?", updatedComment)
 		return res.json(updatedComment[1])
+	})
+)
+
+// Delete comment route
+router.delete(
+	'/:songId/comments/:commentId',
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		
 	})
 )
 
