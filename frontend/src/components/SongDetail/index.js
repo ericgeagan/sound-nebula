@@ -3,18 +3,19 @@ import { useDispatch, useSelector } from "react-redux";
 import './SongDetail.css';
 import { deleteSong, getComments, getSong } from "../../store/song";
 import { Link, useHistory, useParams } from "react-router-dom";
-import CommentList from "../CommentList";
+import CommentBox from "../CommentBox";
+import CommentForm from "../CommentForm";
 
 const SongDetail = () => {
 	const { songId } = useParams()
-	const userId = useSelector(state=> state.session.user.id)
+	const userId = useSelector(state=> state.session?.user?.id)
 	const song = useSelector(state => state.song[songId])
 	const comments = useSelector(state => state.song[songId]?.comments)
 	const history = useHistory()
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(getSong())
+		dispatch(getSong()) // Should change this to getOneSong
 		dispatch(getComments(songId))
 	}, [dispatch])
 
@@ -30,6 +31,7 @@ const SongDetail = () => {
 		}
 	}
 
+	// Edit Song Page
 	const handleEdit = async (e) => {
 		history.push(`/songs/${songId}/edit`)
 	}
@@ -46,7 +48,10 @@ const SongDetail = () => {
 			<div>Likes: {song.likes}</div>
 			{userId === song.userId ? <button onClick={handleEdit}>Edit</button> : null}
 			{userId === song.userId ? <button onClick={handleDelete}>Delete</button> : null}
-			<CommentList comments={comments} />
+			<CommentForm songId={songId}/>
+			{comments?.map(comment => (
+				<CommentBox comment={comment}/>
+			))}
 		</>
 	)
 }

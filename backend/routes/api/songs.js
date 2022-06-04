@@ -68,8 +68,29 @@ router.post(
 	requireAuth,
 	asyncHandler(async (req, res) => {
 		const id = await Comment.create(req.body)
-		return res.redirect(`${req.baseUrl}/${id}`);
+		// return res.redirect(`${req.baseUrl}/${id}`);
+		console.log(id)
+		return res.json(id)
 }))
+
+router.put(
+	'/:songId/comments/:commentId',
+	requireAuth,
+	asyncHandler(async (req, res) => {
+		const comment = req.body
+		const commentId = req.params.commentId
+		const updatedComment = await Comment.update(
+			comment,
+			{
+				where: { id: commentId },
+				returning: true,
+				plain: true
+			}
+		)
+		// console.log("ANYTING FORM HERE?", updatedComment)
+		return res.json(updatedComment[1])
+	})
+)
 
 // Update song route
 router.put(
@@ -79,15 +100,15 @@ router.put(
 	asyncHandler(async (req, res) => {
 		const song = req.body
 		const id = req.params.id
-		delete song.id
+		// delete song.id
 		const updatedSong = await Song.update(
 			song, 
 			{
 				where: { id },
-				// returning: true,
-				// plain: true
+				returning: true,
+				plain: true
 			})
-		return res.json(updatedSong)
+		return res.json(updatedSong[1])
 }))
 
 // Delete song route

@@ -41,6 +41,9 @@ function App() {
           </Route>
         </Switch>
       )}
+      <footer>
+        <a href="https://www.flaticon.com/free-icons/nebula" title="nebula icons">Nebula icons created by Freepik - Flaticon</a>
+      </footer>
     </>
   );
 }

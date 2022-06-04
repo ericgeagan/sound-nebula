@@ -35,6 +35,18 @@ const loadComments = (list, songId) => ({
 	songId
 })
 
+const addComment = (comment, songId) => ({
+	type: ADD_COMMENT,
+	comment,
+	songId
+})
+
+const updateComment = (comment, songId) => ({
+	type: UPDATE_COMMENT,
+	comment,
+	songId
+})
+
 export const getSong = () => async dispatch => {
 	const response = await csrfFetch(`/api/songs`)
 
@@ -50,6 +62,34 @@ export const getComments = (songId) => async dispatch => {
 	if (response.ok) {
 		const comments = await response.json()
 		dispatch(loadComments(comments, songId))
+	}
+}
+
+export const createComment = (payload, songId) => async dispatch => {
+	const response = await csrfFetch(`/api/songs/${songId}/comments`, {
+		method: 'POST',
+		body: JSON.stringify(payload)
+	})
+
+	if (response.ok) {
+		const comment = await response.json()
+		dispatch(addComment(comment, songId))
+		return comment
+	}
+}
+
+export const editComment = (payload, commentId) => async dispatch => {
+	console.log("checking thunk action", payload, commentId)
+	const response = await csrfFetch(`/api/songs/${payload.songId}/comments/${commentId}`, {
+		method: 'PUT',
+		body: JSON.stringify(payload)
+	})
+
+	if (response.ok) {
+		const comment = await response.json()
+		// console.log('UPDATED COMMENT', comment)
+		dispatch(updateComment(comment, payload.songId))
+		return comment
 	}
 }
 
@@ -85,6 +125,7 @@ export const editSong = (payload, songId) => async (dispatch) => {
 
 	if (response.ok) {
 		const song = await response.json()
+		// console.log('UPDATED SONG', song)
 		dispatch(update(song))
 		return song
 	}
@@ -150,6 +191,31 @@ const songReducer = (state = initialState, action) => {
 					comments: action.list.map(comment => comment)
 				},
 			}
+		case ADD_COMMENT:
+			return {
+				...state,
+				[action.songId]: {
+					...state[action.songId],
+					comments: [...state[action.songId]?.comments, action.comment]
+				}
+			}
+		case UPDATE_COMMENT:
+			const editCommentState = {
+				...state,
+			}
+			let oldComments = state[action.songId]?.comments || []
+			// console.log(oldComments, action.songId)
+			// console.log('reducer', action.comment, action.songId)
+			if (oldComments?.length) {
+				// console.log('is it getting here?', oldComments)
+				oldComments = oldComments.filter(comment => comment.id !== action.comment.id)
+				// console.log('after filter', oldComments)
+			}
+			editCommentState[action.songId] = {
+				...state[action.songId],
+				comments: [...oldComments, action.comment]
+			}
+			return editCommentState
 		default:
 			return state
 	}

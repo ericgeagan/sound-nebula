@@ -35,7 +35,11 @@ const SongDetailEdit = () => {
 
 	// If incorrect user, render unauthorized
 	if (song.userId !== userId) {
-		return null
+		return (
+			<>
+				<h3>Unauthorized</h3>
+			</>
+		)
 	}
 
 	return (
