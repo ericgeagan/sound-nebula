@@ -8,6 +8,7 @@ import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SongList from "./components/SongList";
 import SongDetailEdit from "./components/SongDetailEdit";
+import MusicPlayer from "./components/MusicPlayer";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
           </Route>
         </Switch>
       )}
+      <MusicPlayer />
       <footer>
         <a href="https://www.flaticon.com/free-icons/nebula" title="nebula icons">Nebula icons created by Freepik - Flaticon</a>
       </footer>

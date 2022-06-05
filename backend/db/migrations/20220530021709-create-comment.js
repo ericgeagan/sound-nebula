@@ -20,6 +20,7 @@ module.exports = {
       songId: {
         allowNull: false,
         type: Sequelize.INTEGER,
+        onDelete: 'CASCADE',
         references: {
           model: {
             tableName: 'Songs'

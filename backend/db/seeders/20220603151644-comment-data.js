@@ -29,5 +29,9 @@ module.exports = {
       Example:
       return queryInterface.bulkDelete('People', null, {});
     */
+    const Op = Sequelize.Op;
+    return queryInterface.bulkDelete('Songs', {
+      userId: { [Op.in]: [1] }
+    }, {});
   }
 };

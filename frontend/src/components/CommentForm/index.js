@@ -32,6 +32,7 @@ const CommentForm = ({ songId }) => {
 					placeholder="Comment"
 					type='text'
 					value={comment}
+					required={true}
 					onChange={(e) => setComment(e.target.value)} />
 				<button type='submit'>Submit</button>
 			</form>

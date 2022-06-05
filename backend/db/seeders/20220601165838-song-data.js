@@ -22,6 +22,16 @@ module.exports = {
       body: 'Written and performed by French electronic music duo Daft Punk and American musician Panda Bear of the band Animal Collective.',
       createdAt: new Date(),
       updatedAt: new Date()
+    }, {
+      userId: 1,
+      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/No-album-art.png?20160131100336',
+      url: 'https://cloudify.s3.us-west-2.amazonaws.com/0a93593e3d434ebc8eaaf081be48f3d7.mp3',
+      title: 'Test Song',
+      genre: 'Rap',
+      likes: 5,
+      body: 'Streets.',
+      createdAt: new Date(),
+      updatedAt: new Date()
     }], {});
   },
 
@@ -35,7 +45,7 @@ module.exports = {
     */
     const Op = Sequelize.Op;
     return queryInterface.bulkDelete('Songs', {
-      title: { [Op.in]: ['Doin it Right'] }
+      title: { [Op.in]: ['Doin it Right', 'Test Song'] }
     }, {});
   }
 };

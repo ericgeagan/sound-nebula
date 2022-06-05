@@ -45,7 +45,7 @@ const SongDetail = () => {
 			<img src={song.imageUrl}></img>
 			<h3>{song.title}</h3>
 			<p>{song.body}</p>
-			<div>Likes: {song.likes}</div>
+			{/* <div>Likes: {song.likes}</div> */}
 			{userId === song.userId ? <button onClick={handleEdit}>Edit</button> : null}
 			{userId === song.userId ? <button onClick={handleDelete}>Delete</button> : null}
 			<CommentForm songId={songId}/>

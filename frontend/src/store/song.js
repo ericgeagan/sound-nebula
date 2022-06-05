@@ -202,6 +202,7 @@ const songReducer = (state = initialState, action) => {
 			updatedState.list = [...state.list.filter(song => song.id !== action.song.id), action.song]
 			return updatedState
 		case LOAD_COMMENTS:
+			// console.log('test')
 			return {
 				...state,
 				[action.songId]: {
