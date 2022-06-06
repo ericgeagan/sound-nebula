@@ -62,7 +62,7 @@ const SongDetailEdit = () => {
 
 	return (
 		<div className="add-form">
-			<h1>Add new song</h1>
+			<h1>Edit Song Details</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
           {errors.map((error, idx) => (
