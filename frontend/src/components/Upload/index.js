@@ -39,7 +39,9 @@ const Upload = () => {
 		// 	return r
 		// })()
 		createdSong.then(val => {
-			history.push(`/songs/${val.id}`)
+			if (val) {
+				history.push(`/songs/${val.id}`)
+			}
 			// data = val.id
 		}).catch(err => err)
 		// console.log(data)
