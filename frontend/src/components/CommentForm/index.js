@@ -8,10 +8,13 @@ const CommentForm = ({ songId }) => {
 	const dispatch = useDispatch()
 	const history = useHistory()
 	const [comment, setComment] = useState('')
+	const [errors, setErrors] = useState([])
 	const userId = useSelector((state)=> state.session?.user?.id)
 	const username = useSelector(state => state.session?.user?.username)
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		setErrors([])
 		if (!userId) {
 			history.push(`/signup`)
 		} else {
@@ -22,7 +25,12 @@ const CommentForm = ({ songId }) => {
 				username,
 				userId
 			}
-			let newComment = await dispatch(createComment(payload, songId))
+			let newComment = dispatch(createComment(payload, songId)).catch(
+				async (res) => {
+					const data = await res.json()
+					if (data && data.errors) setErrors(data.errors)
+				}
+			)
 			setComment('')
 		}
 	}
@@ -30,6 +38,11 @@ const CommentForm = ({ songId }) => {
 	return (
 		<>
 			<form onSubmit={handleSubmit}>
+				<ul>
+          {errors.map((error, idx) => (
+            <li className="error2" key={idx}>{error}</li>
+          ))}
+        </ul>
 				<input
 					placeholder="Comment"
 					type='text'

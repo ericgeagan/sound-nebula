@@ -2,3 +2,9 @@ label {
 	font-family: "Overpass",sans-serif;
 	color: white;
 }
+
+.error2 {
+	list-style-type: none;
+	font-family: "Overpass",sans-serif;
+	color: black;
+}

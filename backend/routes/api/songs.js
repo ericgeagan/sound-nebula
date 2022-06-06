@@ -19,6 +19,22 @@ const validateSong = [
 	check('title')
 		.exists({ checkFalsy: true })
 		.withMessage('Please provide a song title.'),
+	check('title')
+		.exists({ checkFalsy: true })
+    .isLength({ max: 255 })
+    .withMessage('Song title is too long.'),
+	check('body')
+		.exists({ checkFalsy: true })
+    .isLength({ max: 255 })
+    .withMessage('Description is too long.'),
+	handleValidationErrors
+]
+
+const validateComment = [
+	check('body')
+		.exists({ checkFalsy: true })
+		.isLength({ max: 255 })
+		.withMessage('Comment is too long.'),
 	handleValidationErrors
 ]
 
@@ -123,6 +139,7 @@ router.get(
 router.post(
 	'/:id/comments', 
 	requireAuth,
+	validateComment,
 	asyncHandler(async (req, res) => {
 		const id = await Comment.create(req.body)
 		// return res.redirect(`${req.baseUrl}/${id}`);

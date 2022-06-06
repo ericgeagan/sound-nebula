@@ -11,10 +11,12 @@ const Upload = () => {
 	const [url, setUrl] = useState('')
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
+	const [errors, setErrors] = useState([])
 	const userId = useSelector((state)=> state.session?.user?.id)
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault()
+		setErrors([])
 		const payload = {
 			userId,
 			imageUrl,
@@ -24,11 +26,19 @@ const Upload = () => {
 			genre: 'EDM',
 			likes: 0,
 		}
-		let createdSong = await dispatch(createSong(payload))
-		if (createdSong) {
-			history.push(`/songs/${createdSong.id}`)
-			// history.push('/')
-		}
+		let createdSong = dispatch(createSong(payload)).catch(
+			async (res) => {
+				const data = await res.json()
+				if (data && data.errors) {
+					setErrors(data.errors)
+				}
+			}
+		)
+		// console.log(await createSong.json())
+		// if (createdSong) {
+		// 	history.push(`/songs/${createdSong.id}`)
+		// 	// history.push('/')
+		// }
 	}
 
 	if (!userId) {
@@ -39,20 +49,28 @@ const Upload = () => {
 		<div className="add-form">
 			<h1>Add new song</h1>
 			<form onSubmit={handleSubmit}>
+				<ul>
+          {errors.map((error, idx) => (
+            <li className="error2" key={idx}>{error}</li>
+          ))}
+        </ul>
 				<input 
 					placeholder="Image URL"
 					type='url'
 					value={imageUrl}
+					required
 					onChange={(e) => setImageUrl(e.target.value)} />
 				<input 
 					placeholder="Song URL"
 					type='url'
 					value={url}
+					required
 					onChange={(e) => setUrl(e.target.value)} />
 				<input 
 					placeholder="Song Title"
 					type='text'
 					value={title}
+					required
 					onChange={(e) => setTitle(e.target.value)} />
 				<input 
 					placeholder="Description"
