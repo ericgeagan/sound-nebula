@@ -8,15 +8,17 @@ const SongDetailEdit = () => {
 	const { songId } = useParams()
 	const dispatch = useDispatch()
 	const history = useHistory()
-	const userId = useSelector((state)=> state.session.user.id)
+	const userId = useSelector((state)=> state.session?.user?.id)
 	const song = useSelector(state => state.song[songId])
-	const [imageUrl, setImageUrl] = useState(song.imageUrl || '')
-	const [url, setUrl] = useState(song.url || '')
-	const [title, setTitle] = useState(song.title || '')
-	const [description, setDescription] = useState(song.body || '')
+	const [imageUrl, setImageUrl] = useState(song?.imageUrl || '')
+	const [url, setUrl] = useState(song?.url || '')
+	const [title, setTitle] = useState(song?.title || '')
+	const [description, setDescription] = useState(song?.body || '')
+	const [errors, setErrors] = useState([])
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault()
+		setErrors([])
 		const payload = {
 			userId,
 			imageUrl,
@@ -26,26 +28,47 @@ const SongDetailEdit = () => {
 			genre: 'EDM',
 			likes: 0,
 		}
-		let song = await dispatch(editSong(payload, songId))
-		if (song) {
-			history.push(`/songs/${songId}`)
-			// history.push('/')
-		}
+		let song = dispatch(editSong(payload, songId)).catch(
+			async (res) => {
+				const data = await res.json()
+				if (data && data.errors) {
+					setErrors(data.errors)
+				}
+			}
+		)
+		song.then(val => {
+			if (val) {
+				history.push(`/songs/${val.id}`)
+			}
+		}).catch(err => err)
+		// if (song) {
+		// 	history.push(`/songs/${songId}`)
+		// 	// history.push('/')
+		// }
+	}
+
+	if (!userId) {
+		history.push('/')
 	}
 
 	// If incorrect user, render unauthorized
-	if (song.userId !== userId) {
+	if (song?.userId !== userId) {
 		return (
 			<>
-				<h3>Unauthorized</h3>
+				<h1 className="notfound">Unauthorized</h1>
 			</>
 		)
 	}
 
 	return (
-		<>
+		<div className="add-form">
 			<h1>Add new song</h1>
 			<form onSubmit={handleSubmit}>
+				<ul>
+          {errors.map((error, idx) => (
+            <li className="error2" key={idx}>{error}</li>
+          ))}
+        </ul>
 				<input 
 					placeholder="Image URL"
 					type='url'
@@ -68,7 +91,7 @@ const SongDetailEdit = () => {
 					onChange={(e) => setDescription(e.target.value)} />
 				<button type='submit'>Submit</button>
 			</form>
-		</>
+		</div>
 	)
 }
 

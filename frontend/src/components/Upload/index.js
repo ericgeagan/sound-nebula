@@ -31,12 +31,19 @@ const Upload = () => {
 				const data = await res.json()
 				if (data && data.errors) {
 					setErrors(data.errors)
-				}
+				} 
 			}
 		)
-		// console.log(await createSong.json())
-		// if (createdSong) {
-		// 	history.push(`/songs/${createdSong.id}`)
+		// createdSong = (async function() {
+		// 	let r = await createdSong.json()
+		// 	return r
+		// })()
+		createdSong.then(val => {
+			history.push(`/songs/${val.id}`)
+			// data = val.id
+		}).catch(err => err)
+		// console.log(data)
+		// if (data) {
 		// 	// history.push('/')
 		// }
 	}
