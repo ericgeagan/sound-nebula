@@ -39,7 +39,7 @@ function App() {
             <Upload />
           </Route>
           <Route >
-            <h3>Page Not Found.</h3>
+            <h1 className="notfound">404 Page Not Found.</h1>
           </Route>
         </Switch>
       )}

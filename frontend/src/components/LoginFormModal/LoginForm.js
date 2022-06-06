@@ -20,6 +20,13 @@ function LoginForm() {
     );
   };
 
+  const demoLogin = (e) => {
+    e.preventDefault();
+    setErrors([]);
+    setCredential('Demo-lition')
+    setPassword('password')
+  }
+
   return (
     <div className="login-div">
       <h1>Login</h1>
@@ -50,6 +57,7 @@ function LoginForm() {
           />
         </label>
         <button type="submit">Log In</button>
+        <button type='button' onClick={demoLogin} className='demo'>Demo User</button>
       </form>
     </div>
   );
