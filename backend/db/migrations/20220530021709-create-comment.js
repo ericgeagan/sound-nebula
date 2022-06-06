@@ -17,6 +17,10 @@ module.exports = {
           }
         }
       },
+      username: {
+        allowNull: false,
+        type: Sequelize.STRING
+      },
       songId: {
         allowNull: false,
         type: Sequelize.INTEGER,

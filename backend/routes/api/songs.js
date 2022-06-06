@@ -1,5 +1,8 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
+// const AWS = require('aws-sdk')
+// const config = require('../../config/index')
+// const awsId = config.aws
 
 const { requireAuth } = require('../../utils/auth')
 const { Song, Comment } = require('../../db/models')
@@ -32,6 +35,60 @@ router.post(
 		// return res.redirect(`/`)
 		return res.json(song)
 }))
+
+// const s3 = new AWS.S3({
+// 	accessKeyId: awsId.accessKey,
+// 	secretAccessKey: awsId.secretAccessKey
+// })
+
+// const uploadFile = async (file, title) => {
+// 	// Read content from the file
+
+// 	// Setting up S3 upload parameters
+// 	const params = {
+// 			Bucket: 'BUCKET_NAME',
+// 			Key: title, // File name you want to save as in S3
+// 			Body: file
+// 	};
+
+// 	// Uploading files to the bucket
+// 	const songUrl = await s3.upload(params, (err, data) => {
+// 			if (err) {
+// 					throw err;
+// 			}
+// 			console.log(`File uploaded successfully. ${data.Location}`);
+// 			return data.Location
+// 	});
+// 	return songUrl
+// };
+
+// router.post(
+// 	'/upload',
+// 	asyncHandler(async (req, res) => {
+// 		console.log('router here')
+// 		const song = req.files['song']
+// 		let image
+// 		if (req.files['image']) {
+// 			image = req.files['image']
+// 		}
+
+// 		const s3params = {
+// 			Bucket: 'soundnebula',
+// 			Key: song.title,
+// 			Body: song
+// 		}
+
+// 		s3.upload(s3params, (err, data) => {
+// 			if (err) {
+// 				throw err
+// 			}
+// 			console.log('File uploaded successfully', data.location)
+// 			return {
+// 				song_path: data.location
+// 			}
+// 		})
+// 	})
+// )
 
 // Read route (get all songs)
 router.get(

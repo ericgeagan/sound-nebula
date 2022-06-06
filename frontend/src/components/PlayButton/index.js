@@ -35,7 +35,7 @@ const PlayButton = ({ songId }) => {
 
 	return (
 		<div onClick={playSong} >
-			{pause ? <i class="fa-solid fa-circle-pause"></i> : <i class="fa-solid fa-circle-play"></i>}
+			{pause ? <i className="fa-solid fa-circle-pause"></i> : <i className="fa-solid fa-circle-play"></i>}
 			{/* <img src='../icons/pause.png' className='play icon' /> */}
 		</div>
 	)

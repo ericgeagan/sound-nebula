@@ -9,6 +9,7 @@ const CommentForm = ({ songId }) => {
 	const history = useHistory()
 	const [comment, setComment] = useState('')
 	const userId = useSelector((state)=> state.session?.user?.id)
+	const username = useSelector(state => state.session?.user?.username)
 
 	const handleSubmit = async (e) => {
 		if (!userId) {
@@ -18,6 +19,7 @@ const CommentForm = ({ songId }) => {
 			const payload = {
 				body: comment,
 				songId,
+				username,
 				userId
 			}
 			let newComment = await dispatch(createComment(payload, songId))

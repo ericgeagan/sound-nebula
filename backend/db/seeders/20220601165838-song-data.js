@@ -14,22 +14,102 @@ module.exports = {
     */
     return queryInterface.bulkInsert('Songs', [{
       userId: 1,
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/No-album-art.png?20160131100336',
-      url: 'https://cloudify.s3.us-west-2.amazonaws.com/2ef37c13d6fc439eb2beb243fb7fa4cf.mp3',
-      title: 'Doin it Right',
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay_-_A_Rush_of_Blood_to_the_Head_Cover.png',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay+-+Clocks.mp3',
+      title: 'Clocks',
       genre: 'EDM',
       likes: 10,
-      body: 'Written and performed by French electronic music duo Daft Punk and American musician Panda Bear of the band Animal Collective.',
+      body: 'By Coldplay',
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       userId: 1,
-      imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/No-album-art.png?20160131100336',
-      url: 'https://cloudify.s3.us-west-2.amazonaws.com/0a93593e3d434ebc8eaaf081be48f3d7.mp3',
-      title: 'Test Song',
-      genre: 'Rap',
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay_-_A_Rush_of_Blood_to_the_Head_Cover.png',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay+-+The+Scientist.mp3',
+      title: 'The Scientist',
+      genre: 'EDM',
       likes: 5,
-      body: 'Streets.',
+      body: 'By Coldplay',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 1,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay_-_Viva_la_Vida_or_Death_and_All_His_Friends.png',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Coldplay+-+Viva+La+Vida.mp3',
+      title: 'Viva La Vida',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Coldplay',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 2,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/barcelona.jpeg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Ed+Sheeran+-+Barcelona+%5BOfficial+Audio%5D.mp3',
+      title: 'Barcelona',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Ed Sheeran',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 2,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/barcelona.jpeg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Ed+Sheeran+-+Happier+%5BOfficial+Audio%5D.mp3',
+      title: 'Happier',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Ed Sheeran',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 2,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/barcelona.jpeg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Ed+Sheeran+-+Perfect+%5BOfficial+Audio%5D.mp3',
+      title: 'Perfect',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Ed Sheeran',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 2,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/barcelona.jpeg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Ed+Sheeran+-+What+Do+I+Know+%5BOfficial+Audio%5D.mp3',
+      title: 'What Do I Know',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Ed Sheeran',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 3,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/Imagine-Dragons-Believer-art.jpg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Imagine+Dragons+-+Believer+(Audio).mp3',
+      title: 'Believer',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Imagine Dragons',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 3,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/Imagine-Dragons-Believer-art.jpg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/Imagine+Dragons+-+Thunder.mp3',
+      title: 'Thunder',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Imagine Dragons',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      userId: 1,
+      imageUrl: 'https://soundnebula.s3.us-west-2.amazonaws.com/x%26y.jpg',
+      url: 'https://soundnebula.s3.us-west-2.amazonaws.com/X%26Y+-+Coldplay+-+Fix+You.mp3',
+      title: 'Fix You',
+      genre: 'EDM',
+      likes: 5,
+      body: 'By Coldplay',
       createdAt: new Date(),
       updatedAt: new Date()
     }], {});

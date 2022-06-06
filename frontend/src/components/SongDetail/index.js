@@ -5,6 +5,7 @@ import { deleteSong, getComments, getSong } from "../../store/song";
 import { Link, useHistory, useParams } from "react-router-dom";
 import CommentBox from "../CommentBox";
 import CommentForm from "../CommentForm";
+import PlayButton from "../PlayButton";
 
 const SongDetail = () => {
 	const { songId } = useParams()
@@ -44,6 +45,7 @@ const SongDetail = () => {
 		<>
 			<img src={song.imageUrl}></img>
 			<h3>{song.title}</h3>
+			<PlayButton songId={song.id} />
 			<p>{song.body}</p>
 			{/* <div>Likes: {song.likes}</div> */}
 			{userId === song.userId ? <button onClick={handleEdit}>Edit</button> : null}

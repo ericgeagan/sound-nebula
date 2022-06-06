@@ -23,6 +23,7 @@ const CommentBox = ({ comment }) => {
 		const payload = {
 			body: editedComment,
 			songId: comment.songId,
+			username: comment.username,
 			userId
 		}
 		let updatedComment = await dispatch(editComment(payload, comment.id))
@@ -61,7 +62,7 @@ const CommentBox = ({ comment }) => {
 
 					: <div>
 							<div>{comment.body}</div>
-							<div>{comment.userId}</div>
+							<div>{comment.username}</div>
 							{userId === comment.userId ? <button onClick={openEdit}>Edit</button> : null}
 							{userId === comment.userId ? <button onClick={handleDelete}>Delete</button> : null}
 						</div>
