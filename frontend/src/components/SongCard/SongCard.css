@@ -13,4 +13,26 @@
 img.song-card {
 	max-width: 170px;
 	max-height: 170px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+span {
+  color: white;
+  font-weight: bold;
+  font-family: "Overpass",sans-serif;
+  cursor: default;
+}
+
+.title {
+  display: flex;
+  margin-left: 10px;
+}
+
+.card-div {
+  margin-bottom: 50px;
+}
+
+.title span {
+  margin-left: 5px;
 }

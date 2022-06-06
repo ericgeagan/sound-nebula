@@ -21,13 +21,13 @@ const SongList = () => {
 		return null
 	}
 	return (
-		<>
+		<div className="card-grid">
 			{songs.map(song => {
 				return (
 					<SongCard key={song.id} song={song}/>
 				)
 			})}
-		</>
+		</div>
 	)
 }
 

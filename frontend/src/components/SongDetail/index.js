@@ -42,19 +42,26 @@ const SongDetail = () => {
 	}
 
 	return (
-		<>
-			<img src={song.imageUrl}></img>
-			<h3>{song.title}</h3>
-			<PlayButton songId={song.id} />
-			<p>{song.body}</p>
-			{/* <div>Likes: {song.likes}</div> */}
-			{userId === song.userId ? <button onClick={handleEdit}>Edit</button> : null}
-			{userId === song.userId ? <button onClick={handleDelete}>Delete</button> : null}
-			<CommentForm songId={songId}/>
-			{comments?.map(comment => (
-				<CommentBox key={comment.id} comment={comment}/>
-			))}
-		</>
+		<div>
+			<img className="image-card" src={song.imageUrl}></img>
+			<div className="details">
+				<div className="title-button">
+					<div className="button-container">
+						<PlayButton songId={song.id} />
+					</div>
+					<h1>{song.title}</h1>
+				</div>
+				<p>{song.body}</p>
+				<p>Likes: {song.likes}</p>
+				<p>Genre: {song.genre}</p>
+				{userId === song.userId ? <button className="button" onClick={handleEdit}>Edit</button> : null}
+				{userId === song.userId ? <button className="button" onClick={handleDelete}>Delete</button> : null}
+				<CommentForm songId={songId}/>
+				{comments?.map(comment => (
+					<CommentBox key={comment.id} comment={comment}/>
+				))}
+			</div>
+		</div>
 	)
 }
 

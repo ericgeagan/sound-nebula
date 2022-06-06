@@ -11,26 +11,32 @@ function Navigation({ isLoaded }){
   let sessionLinks;
   if (sessionUser) {
     sessionLinks = (
-      <div>
-        <NavLink to='/upload'>Upload</NavLink>
+      <li className='upload'>
+        <NavLink className='navlink upload' to='/upload'>Upload</NavLink>
         <ProfileButton user={sessionUser} />
-      </div>
+      </li>
     );
   } else {
     sessionLinks = (
-      <>
+      <li className='upload'>
         <LoginFormModal />
-        <NavLink to="/signup">Sign Up</NavLink>
-      </>
+        <NavLink className='navlink signup' to="/signup">Sign Up</NavLink>
+      </li>
     );
   }
 
   return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-        {isLoaded && sessionLinks}
+    <ul className='navbar'>
+      <li className='upload'>
+        <img className='icon' src='/icons/nebula.png'></img>
+        <NavLink className='navlink home' exact to="/">SoundNebula</NavLink>
       </li>
+      <li>
+      </li>
+      <li></li>
+      <li></li>
+      <li></li>
+      {isLoaded && sessionLinks}
     </ul>
   );
 }

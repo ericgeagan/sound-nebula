@@ -9,13 +9,15 @@ const MusicPlayer = () => {
 	const song = useSelector(state => state.song[currentSongId])
 
 	return (
-		<>
+		<div className='player-container'>
 			<ReactPlayer 
 				playing={playing}
 				url={song?.url}
 				controls={false}
+				width={0}
+				height={0}
 			/>
-		</>
+		</div>
 	)
 }
 

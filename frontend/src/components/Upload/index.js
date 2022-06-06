@@ -11,7 +11,7 @@ const Upload = () => {
 	const [url, setUrl] = useState('')
 	const [title, setTitle] = useState('')
 	const [description, setDescription] = useState('')
-	const userId = useSelector((state)=> state.session.user.id)
+	const userId = useSelector((state)=> state.session?.user?.id)
 
 	const handleSubmit = async (e) => {
 		e.preventDefault()
@@ -30,8 +30,13 @@ const Upload = () => {
 			// history.push('/')
 		}
 	}
+
+	if (!userId) {
+		history.push('/')
+	}
+
 	return (
-		<>
+		<div className="add-form">
 			<h1>Add new song</h1>
 			<form onSubmit={handleSubmit}>
 				<input 
@@ -56,7 +61,7 @@ const Upload = () => {
 					onChange={(e) => setDescription(e.target.value)} />
 				<button type='submit'>Submit</button>
 			</form>
-		</>
+		</div>
 	)
 }
 

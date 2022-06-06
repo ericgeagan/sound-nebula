@@ -1,0 +1,91 @@
+.navbar {
+	background-color: #333;
+	list-style-type: none;
+	display: grid;
+	grid-template-rows: 46px;
+	grid-template-columns: 1fr 2fr 5fr 2fr 1fr 1fr;
+	align-items: center;
+	padding: 0 20px;
+	margin: 0;
+}
+
+.icon {
+	height: 35px;
+	width: 35px;
+}
+
+.navlink {
+	color: #ccc;
+	display: flex;
+	font-family: "Overpass",sans-serif;
+	font-size: 14px;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+}
+
+.user-button {
+	min-width: 30px;
+	max-width: 50px;
+	height: 30px;
+	font-size: 10px;
+	background-color: white;
+	margin-left: 30px;
+	font-family: "Overpass",sans-serif;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.upload {
+	display: flex;
+}
+
+.signup {
+	margin-top: 2px;
+	white-space: nowrap;
+	margin-left: 10px;
+}
+
+.home {
+	margin-top: 9px;
+	margin-left: 10px;
+	white-space: nowrap;
+}
+
+.upload.navlink {
+	margin-top: 7px;
+}
+
+.profile-dropdown {
+	position: absolute;
+	right: 0;
+	list-style-type: none;
+	font-family: "Overpass",sans-serif;
+	transition-duration: 0.4s;
+	box-shadow: 0 8px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+	background-color: white;
+	border-radius: 14px;
+	border: none;
+	color: black;
+	padding: 16px 32px;
+	text-align: center;
+	font-size: 16px;
+	margin: 40px 2px;
+	transition: 0.3s;
+	display: inline-block;
+	text-decoration: none;
+}
+
+.profile-dropdown li {
+	margin-bottom: 5px;
+	cursor: default;
+}
+
+.logout {
+	color: white;
+	border-radius: 4px;
+	background-color: black;
+	cursor: pointer;
+}

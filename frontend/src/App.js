@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import SongList from "./components/SongList";
 import SongDetailEdit from "./components/SongDetailEdit";
 import MusicPlayer from "./components/MusicPlayer";
+import './index.css'
 
 function App() {
   const dispatch = useDispatch();

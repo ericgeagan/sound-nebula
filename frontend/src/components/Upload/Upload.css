@@ -1,0 +1,16 @@
+.add-form {
+	width: 500px;
+	margin-top: 75px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 350px;
+}
+
+.add-form form {
+	display: flex;
+	flex-direction: column;
+}
+
+h1 {
+	margin-bottom: 20px;
+}

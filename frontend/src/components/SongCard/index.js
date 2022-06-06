@@ -6,13 +6,15 @@ import './SongCard.css';
 
 const SongCard = ({ song }) => {
 	return (
-		<div>
+		<div className="card-div">
 			<Link key={song.id} to={`/songs/${song.id}`}>
 				<img src={song.imageUrl} className='song-card'></img>
 				{/* <img src='https://www.kindpng.com/picc/b/1-18309_soundcloud-button-png.png'></img> */}
 			</Link>
-			<PlayButton songId={song.id} />
-			<span>{song.title}</span>
+			<div className="title">
+				<PlayButton songId={song.id} />
+				<span>{song.title}</span>
+			</div>
 		</div>
 	)
 }

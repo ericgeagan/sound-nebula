@@ -57,14 +57,16 @@ const CommentBox = ({ comment }) => {
 								/>
 								<button type='submit'>Submit</button>
 							</form>
-							<button onClick={openEdit}>Cancel</button>
+							<button className="button" onClick={openEdit}>Cancel</button>
 						</div>
 
-					: <div>
-							<div>{comment.body}</div>
-							<div>{comment.username}</div>
-							{userId === comment.userId ? <button onClick={openEdit}>Edit</button> : null}
-							{userId === comment.userId ? <button onClick={handleDelete}>Delete</button> : null}
+					: <div className="comment-div">
+							<div className="comment-content">
+								<p className="comment">{comment.body}</p>
+								<p className="comment">User: {comment.username}</p>
+								{userId === comment.userId ? <button className="button" onClick={openEdit}>Edit</button> : null}
+								{userId === comment.userId ? <button className="button" onClick={handleDelete}>Delete</button> : null}
+							</div>
 						</div>
 				}
 
