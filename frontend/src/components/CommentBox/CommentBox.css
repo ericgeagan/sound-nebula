@@ -11,7 +11,7 @@
 
 p {
 	font-family: "Overpass",sans-serif;
-	color: white;
+	color: black;
 }
 
 .comment {
@@ -21,8 +21,8 @@ p {
 
 .comment-div {
 	width: 600px;
-	background-color: black;
-	border-radius: 15px;
+	border: 2px solid black;
+	/* border-radius: 15px; */
 }
 
 .comment-content {

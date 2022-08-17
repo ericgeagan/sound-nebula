@@ -42,7 +42,7 @@ const SongDetail = () => {
 	}
 
 	return (
-		<div>
+		<div id='detail-container'>
 			<img className="image-card" src={song.imageUrl}></img>
 			<div className="details">
 				<div className="title-button">

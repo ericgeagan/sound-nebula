@@ -16,9 +16,13 @@ h1 {
 	margin: 0;
 }
 
+.fa-solid {
+	color: black;
+}
+
 h1, p {
 	font-family: "Overpass",sans-serif;
-	color: white;
+	color: black;
 	cursor: default;
 }
 
@@ -36,4 +40,14 @@ h1, p {
 	font-family: "Overpass",sans-serif;
   cursor: pointer;
 	margin-right: 3px;
+}
+
+#detail-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 80%;
+	background-color: white;
+	margin-left: auto;
+	margin-right: auto;
 }
