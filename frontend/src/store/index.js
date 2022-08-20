@@ -4,11 +4,13 @@ import sessionReducer from './session';
 
 import song from './song'
 import player from './player'
+import playlists from './playlist'
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   song,
-  player
+  player,
+  playlists
 });
 
 let enhancer;

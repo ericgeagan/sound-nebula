@@ -34,3 +34,21 @@ export const addPlaylistThunk = (payload) => async dispatch => {
 		return playlist
 	}
 }
+
+const playlistReducer = (state = {}, action) => {
+	let newState = { ...state }
+	switch(action.type) {
+		case LOAD:
+			action.playlists.forEach(playlist => {
+				newState[playlist.id] = playlist
+			})
+			return newState
+		case ADD_PLAYLIST:
+			newState = { ...state, [action.playlist.id]: action.playlist }
+			return newState
+		default:
+			return state
+	}
+}
+
+export default playlistReducer

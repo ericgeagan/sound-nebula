@@ -1,0 +1,12 @@
+#header {
+	margin-top: 25px;
+	font-size: 50px;
+}
+
+#playlist-item {
+	border: 2px solid black;
+	border-radius: 4px;
+	font-family: "Overpass",sans-serif;
+	font-size: 30px;
+	padding: 8px;
+}
