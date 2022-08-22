@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useHistory } from "react-router-dom"
-import { addPlaylistThunk, getPlaylistThunk } from "../../store/playlist"
+import { useHistory, Link } from "react-router-dom"
+import { addPlaylistThunk, deletePlaylistThunk, getPlaylistThunk } from "../../store/playlist"
 import './Playlists.css'
 
 const Playlists = () => {
@@ -15,6 +15,11 @@ const Playlists = () => {
 	useEffect(() => {
 		dispatch(getPlaylistThunk())
 	}, [dispatch])
+
+	const handleDelete = async (e, playlistId) => {
+		e.preventDefault()
+		const response = await dispatch(deletePlaylistThunk(playlistId))
+ 	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -55,7 +60,11 @@ const Playlists = () => {
 				<button type='submit'>Add</button>
 				<div id='playlist-container'>
 					{playlists?.map(playlist => (
-						<div id='playlist-item' key={playlist.id}>{playlist.name}</div>
+						<div id='playlist-item'>
+							<Link key={playlist.id} to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+							{/* <div id='playlist-item' key={playlist.id}>{playlist.name}</div> */}
+							<button onClick={e => handleDelete(e, playlist.id)}>delete</button>
+						</div>
 					))}
 				</div>
 			</form>

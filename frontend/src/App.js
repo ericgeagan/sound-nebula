@@ -11,6 +11,7 @@ import SongDetailEdit from "./components/SongDetailEdit";
 import MusicPlayer from "./components/MusicPlayer";
 import './index.css'
 import Playlists from "./components/Playlists";
+import PlaylistDetail from "./components/PlaylistDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -39,8 +40,11 @@ function App() {
           <Route path="/upload">
             <Upload />
           </Route>
-          <Route path='/playlists'>
+          <Route exact path='/playlists'>
             <Playlists />
+          </Route>
+          <Route path ='/playlists/:playlistId'>
+            <PlaylistDetail />
           </Route>
           <Route >
             <h1 className="notfound">404 Page Not Found.</h1>

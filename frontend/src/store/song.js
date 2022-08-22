@@ -85,7 +85,7 @@ export const createComment = (payload, songId) => async dispatch => {
 }
 
 export const editComment = (payload, commentId) => async dispatch => {
-	console.log("checking thunk action", payload, commentId)
+	// console.log("checking thunk action", payload, commentId)
 	const response = await csrfFetch(`/api/songs/${payload.songId}/comments/${commentId}`, {
 		method: 'PUT',
 		body: JSON.stringify(payload)
