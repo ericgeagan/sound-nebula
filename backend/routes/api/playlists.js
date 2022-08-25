@@ -64,13 +64,19 @@ router.post(
 	})
 )
 
+// Remove song from playlist
 router.delete(
 	'/:playlistId/:songId',
 	requireAuth,
 	asyncHandler(async (req, res) => {
 		const playlistId = parseInt(req.params.playlistId)
 		const songId = parseInt(req.params.songId)
-		const playlistSong = await PlaylistSong.findByPk(songId)
+		const playlistSong = await PlaylistSong.findAll({
+			where: {
+				playlistId,
+				songId
+			}
+		})
 		if (playlistSong) {
 			playlistSong.destroy()
 			res.json({ 'message': 'Delete Successful' })
