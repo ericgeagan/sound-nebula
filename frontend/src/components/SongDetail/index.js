@@ -6,6 +6,8 @@ import { Link, useHistory, useParams } from "react-router-dom";
 import CommentBox from "../CommentBox";
 import CommentForm from "../CommentForm";
 import PlayButton from "../PlayButton";
+import { getPlaylistThunk } from "../../store/playlist";
+import { getPlaylistSongsThunk } from "../../store/playlistSong";
 
 const SongDetail = () => {
 	const { songId } = useParams()
@@ -18,6 +20,8 @@ const SongDetail = () => {
 	useEffect(() => {
 		dispatch(getSong()) // Should change this to getOneSong
 		dispatch(getComments(songId))
+		dispatch(getPlaylistThunk())
+		dispatch(getPlaylistSongsThunk())
 	}, [dispatch])
 
 	const handleDelete = async (e) => {
@@ -50,6 +54,9 @@ const SongDetail = () => {
 						<PlayButton songId={song.id} />
 					</div>
 					<h1>{song.title}</h1>
+				</div>
+				<div>
+
 				</div>
 				<p>{song.body}</p>
 				<p>Likes: {song.likes}</p>

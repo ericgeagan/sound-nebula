@@ -36,7 +36,7 @@ function Navigation({ isLoaded }){
       <li></li>
       <li></li>
       <li className='upload'>
-        <NavLink className='navlink' exact to='/playlists'>Playlists</NavLink>
+        {sessionUser && <NavLink className='navlink' exact to='/playlists'>Playlists</NavLink>}
       </li>
       {isLoaded && sessionLinks}
     </ul>

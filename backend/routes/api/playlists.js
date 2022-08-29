@@ -38,17 +38,25 @@ router.post(
 
 // Get all playlistSongs (only logged in)
 router.get(
-	'/:playlistId',
+	'/getAllPlaylistSongs',
 	requireAuth,
 	asyncHandler(async (req, res) => {
-		const playlistSongs = await PlaylistSong.findAll({
-			where: {
-				playlistId: req.params.playlistId
-			}
-		})
+		const playlistSongs = await PlaylistSong.findAll()
 		return res.json(playlistSongs)
 	})
 )
+// router.get(
+// 	'/:playlistId',
+// 	requireAuth,
+// 	asyncHandler(async (req, res) => {
+// 		const playlistSongs = await PlaylistSong.findAll({
+// 			where: {
+// 				playlistId: req.params.playlistId
+// 			}
+// 		})
+// 		return res.json(playlistSongs)
+// 	})
+// )
 
 // Add song to playlist
 router.post(

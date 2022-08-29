@@ -4,10 +4,9 @@ const LOAD = 'playlistSongs/LOAD'
 const ADD = 'playlistSongs/ADD'
 const DELETE = 'playlistSongs/DELETE'
 
-const loadPlaylistSongs = (playlistId, playlistSongs) => ({
+const loadPlaylistSongs = (playlistSongs) => ({
 	type: LOAD,
-	playlistSongs,
-	playlistId
+	playlistSongs
 })
 
 const addPlaylistSong = (playlistId, playlistSong) => ({
@@ -21,12 +20,13 @@ const deletePlaylistSong = (playlistSongId) => ({
 	playlistSongId
 })
 
-export const getPlaylistSongsThunk = (playlistId) => async dispatch => {
-	const response = await csrfFetch(`/api/playlists/${playlistId}`)
+export const getPlaylistSongsThunk = () => async dispatch => {
+	// const response = await csrfFetch(`/api/playlists/${playlistId}`)
+	const response = await csrfFetch(`/api/playlists/getAllPlaylistSongs`)
 
 	if (response.ok) {
 		const playlistSongs = await response.json()
-		dispatch(loadPlaylistSongs(playlistId, playlistSongs))
+		dispatch(loadPlaylistSongs(playlistSongs))
 	}
 }
 
@@ -63,7 +63,7 @@ const playlistSongReducer = (state = {}, action) => {
 	switch(action.type) {
 		case LOAD:
 			action.playlistSongs.forEach(song => {
-				newState[action.playlistId] = [...newState[action.playlistId], song]
+				newState[song.playlistId] = [...newState[song.playlistId], song]
 			})
 			return newState
 		case ADD:
