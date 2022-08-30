@@ -8,6 +8,7 @@ import CommentForm from "../CommentForm";
 import PlayButton from "../PlayButton";
 import { getPlaylistThunk } from "../../store/playlist";
 import { getPlaylistSongsThunk } from "../../store/playlistSong";
+import PlaylistDropdown from "../PlaylistDropdown/playlistdropdown";
 
 const SongDetail = () => {
 	const { songId } = useParams()
@@ -56,7 +57,7 @@ const SongDetail = () => {
 					<h1>{song.title}</h1>
 				</div>
 				<div>
-
+					<PlaylistDropdown />
 				</div>
 				<p>{song.body}</p>
 				<p>Likes: {song.likes}</p>
