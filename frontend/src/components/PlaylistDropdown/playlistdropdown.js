@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
+import { addPlaylistSongThunk, getPlaylistSongsThunk, removePlaylistSongThunk } from "../../store/playlistSong"
 import './PlaylistDropdown.css'
 
-const PlaylistDropdown = (songId) => {
+const PlaylistDropdown = ({ songId }) => {
 	const user = useSelector(state=> state.session.user)
 	const dispatch = useDispatch()
 	const playlists = Object.values(useSelector(state => state.playlists)).filter(playlist => playlist.userId === user?.id)
+	const playlistSongs = useSelector(state => state.playlistSongs)
 	const [dropDownOpen, setDropDownOpen] = useState(false)
+
+	useEffect(() => {
+		dispatch(getPlaylistSongsThunk())
+	}, [dispatch])
+
 
 	useEffect(() => {
 		const closeDropdown = e => {
@@ -25,12 +32,18 @@ const PlaylistDropdown = (songId) => {
 		setDropDownOpen(!dropDownOpen)
 	}
 
-	const handleAddToPlaylist = e => {
+	const handleAddToPlaylist = async e => {
+		const playlist = playlists.find(playlist => playlist.id === Number(e.target.attributes[1].value))
 
+		await dispatch(addPlaylistSongThunk(playlist.id, songId))
+		setDropDownOpen(false)
 	}
 
-	const handleRemoveFromPlaylist = e => {
+	const handleRemoveFromPlaylist = async e => {
+		const playlist = playlists.find(playlist => playlist.id === Number(e.target.attributes[1].value))
 
+		await dispatch(removePlaylistSongThunk(playlist.id, songId))
+		setDropDownOpen(false)
 	}
 
 	return (
@@ -44,7 +57,7 @@ const PlaylistDropdown = (songId) => {
 				<div>
 					<div id='playlist-select' className='dont-close'>
 						{playlists.length > 0 ? playlists.map(playlist => (
-							true
+							playlistSongs[playlist.id] && playlistSongs[playlist.id][songId]
 								? <div id='playlist-option' onClick={e => handleRemoveFromPlaylist(e)} value={playlist.id} key={playlist.id}><i className="fa-solid fa-check"></i>{playlist.name}</div> 
 								: <div id='playlist-option' onClick={e => handleAddToPlaylist(e)} value={playlist.id} key={playlist.id}>{playlist.name}</div> 
 							

@@ -15,9 +15,10 @@ const addPlaylistSong = (playlistId, playlistSong) => ({
 	playlistSong
 })
 
-const deletePlaylistSong = (playlistSongId) => ({
+const deletePlaylistSong = (playlistId, songId) => ({
 	type: DELETE,
-	playlistSongId
+	playlistId,
+	songId
 })
 
 export const getPlaylistSongsThunk = () => async dispatch => {
@@ -62,15 +63,25 @@ const playlistSongReducer = (state = {}, action) => {
 	let newState = { ...state }
 	switch(action.type) {
 		case LOAD:
+			// console.log(action.playlistSongs)
 			action.playlistSongs.forEach(song => {
-				newState[song.playlistId] = [...newState[song.playlistId], song]
+				if (!newState[song.playlistId]) {
+					newState[song.playlistId] = {}
+				}
+				newState[song.playlistId][song.songId] = song
 			})
 			return newState
 		case ADD:
-			newState = { ...state, [action.playlistId]: [ ...newState[action.playlistId], action.playlistSong ] }
+			// newState = { ...state, [action.playlistId][action.playlistSong.songId]: action.playlistSong }
+			if (!newState[action.playlistId]) {
+				newState[action.playlistId] = {}
+			}
+			newState[action.playlistId][action.playlistSong.songId] = action.playlistSong
 			return newState
 		case DELETE:
-			newState = { ...state, [action.playlistId]: [ ...newState[action.playlistId].filter(id => id !== action.playlistSongId) ]}
+			// newState = { ...state, [action.playlistId]: [ ...newState[action.playlistId].filter(id => id !== action.playlistSongId) ]}
+			delete newState[action.playlistId][action.songId]
+			return newState
 		default:
 			return state
 	}

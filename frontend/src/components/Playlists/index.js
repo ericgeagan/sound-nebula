@@ -58,7 +58,7 @@ const Playlists = () => {
 					required={true}
 					onChange={e => setName(e.target.value)} />
 				<button type='submit'>Add</button>
-				<div id='playlist-container'>
+				<div id='playlist-list'>
 					{playlists?.map(playlist => (
 						<div id='playlist-item'>
 							<Link key={playlist.id} to={`/playlists/${playlist.id}`}>{playlist.name}</Link>

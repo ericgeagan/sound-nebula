@@ -69,6 +69,7 @@ router.post(
 			playlistId,
 			songId,
 		})
+		return res.json(playlistSong)
 	})
 )
 
@@ -85,8 +86,9 @@ router.delete(
 				songId
 			}
 		})
-		if (playlistSong) {
-			playlistSong.destroy()
+		// console.log(playlistSong[0])
+		if (playlistSong[0]) {
+			playlistSong[0].destroy()
 			res.json({ 'message': 'Delete Successful' })
 		} else {
 			res.json({ 'message': 'Delete Failed' })
