@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, Link } from "react-router-dom"
 import { addPlaylistThunk, deletePlaylistThunk, getPlaylistThunk } from "../../store/playlist"
+import { getPlaylistSongsThunk } from "../../store/playlistSong"
 import './Playlists.css'
 
 const Playlists = () => {
@@ -12,9 +13,10 @@ const Playlists = () => {
 	const userId = useSelector((state)=> state.session?.user?.id)
 	const playlists = Object.values(useSelector(state => state.playlists))
 
-	useEffect(() => {
-		dispatch(getPlaylistThunk())
-	}, [dispatch])
+	// useEffect(() => {
+	// 	dispatch(getPlaylistThunk())
+	// 	dispatch(getPlaylistSongsThunk())
+	// }, [dispatch])
 
 	const handleDelete = async (e, playlistId) => {
 		e.preventDefault()

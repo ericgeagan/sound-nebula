@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getSong } from "../../store/song";
 import './SongList.css';
 import SongCard from "../SongCard";
+import { getPlaylistSongsThunk } from "../../store/playlistSong";
 
 const SongList = () => {
 	const songs = useSelector(state => {
@@ -13,9 +14,10 @@ const SongList = () => {
 
 	const dispatch = useDispatch()
 
-	useEffect(() => {
-		dispatch(getSong())
-	}, [dispatch])
+	// useEffect(() => {
+	// 	dispatch(getSong())
+	// 	dispatch(getPlaylistSongsThunk())
+	// }, [dispatch])
 
 	if (!songs) {
 		return null

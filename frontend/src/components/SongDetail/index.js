@@ -19,10 +19,10 @@ const SongDetail = () => {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(getSong()) // Should change this to getOneSong
+		// dispatch(getSong()) // Should change this to getOneSong
 		dispatch(getComments(songId))
-		dispatch(getPlaylistThunk())
-		dispatch(getPlaylistSongsThunk())
+		// dispatch(getPlaylistThunk())
+		// dispatch(getPlaylistSongsThunk())
 	}, [dispatch])
 
 	const handleDelete = async (e) => {

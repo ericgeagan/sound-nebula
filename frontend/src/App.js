@@ -12,13 +12,25 @@ import MusicPlayer from "./components/MusicPlayer";
 import './index.css'
 import Playlists from "./components/Playlists";
 import PlaylistDetail from "./components/PlaylistDetail";
+import { getComments, getSong } from "./store/song";
+import { getPlaylistThunk } from "./store/playlist";
+import { getPlaylistSongsThunk } from "./store/playlistSong";
 
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    (async () => {
+      await dispatch(getSong()) // Should change this to getOneSong
+      await dispatch(getPlaylistThunk())
+      await dispatch(getPlaylistSongsThunk())
+    })()
+  }, [dispatch])
 
   return (
     <>
