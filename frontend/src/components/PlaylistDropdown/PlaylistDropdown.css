@@ -1,6 +1,7 @@
 #playlist-main {
 	display: flex;
 	flex-direction: column;
+	width: 203px;
 }
 
 #playlist-container {

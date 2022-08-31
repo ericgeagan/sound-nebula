@@ -60,8 +60,8 @@ const Playlists = () => {
 				<button type='submit'>Add</button>
 				<div id='playlist-list'>
 					{playlists?.map(playlist => (
-						<div id='playlist-item'>
-							<Link key={playlist.id} to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
+						<div key={playlist.id}  id='playlist-item'>
+							<Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
 							{/* <div id='playlist-item' key={playlist.id}>{playlist.name}</div> */}
 							<button onClick={e => handleDelete(e, playlist.id)}>delete</button>
 						</div>
