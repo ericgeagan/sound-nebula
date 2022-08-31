@@ -1,0 +1,39 @@
+#no-playlist-songs {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	font-size: 100px;
+	font-family: "Overpass",sans-serif;
+}
+
+#back-home {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	text-decoration: none;
+	width: 50px;
+	background-color: #ff5d00;
+	color: white;
+	padding: 11px 20px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: medium;
+	font-family: "Lato","Helvetica Neue","Helvetica",sans-serif;
+}
+
+#playlist-song-container {
+	display: flex;
+	flex-direction: row;
+}
+
+#x {
+	color: red;
+	cursor: pointer;
+}

@@ -50,7 +50,7 @@ const PlaylistDropdown = ({ songId }) => {
 		<div>
 			<div id='playlist-main' className='dont-close'>
 				<div id='playlist-container'>
-					<div id='label'>Add to Playlist</div>
+					<div id='label' className="dont-close" onClick={(e) => handleDropDownClick(e)}>Add to Playlist</div>
 					<div id='label-button' className='dont-close' onClick={(e) => handleDropDownClick(e)}><i className="fa-solid fa-caret-down dont-close"></i></div>
 				</div>
 				{dropDownOpen && 

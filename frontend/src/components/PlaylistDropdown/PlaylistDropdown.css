@@ -23,6 +23,7 @@
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
 	font-family: "Lato","Helvetica Neue","Helvetica",sans-serif;
+	cursor: pointer;
 }
 
 #label-button {
@@ -38,7 +39,7 @@
 #playlist-select {
 	position: absolute;
 	border: 1px solid #767676;
-	width: 192px;
+	width: 202px;
 	box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
 	grid-gap: 5px;
 	gap: 5px;

@@ -32,6 +32,7 @@ function Navigation({ isLoaded }){
         <NavLink className='navlink home' exact to="/">SoundNebula</NavLink>
       </li>
       <li>
+        <NavLink className='navlink' exact to="/">Home</NavLink>
       </li>
       <li></li>
       <li></li>
