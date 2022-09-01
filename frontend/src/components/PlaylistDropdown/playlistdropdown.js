@@ -58,10 +58,9 @@ const PlaylistDropdown = ({ songId }) => {
 					<div id='playlist-select' className='dont-close'>
 						{playlists.length > 0 ? playlists.map(playlist => (
 							playlistSongs[playlist.id] && playlistSongs[playlist.id][songId]
-								? <div id='playlist-option' onClick={e => handleRemoveFromPlaylist(e)} value={playlist.id} key={playlist.id}><i className="fa-solid fa-check"></i>{playlist.name}</div> 
+								? <div id='playlist-option' onClick={e => handleRemoveFromPlaylist(e)} value={playlist.id} key={playlist.id}><i id='check' className="fa-solid fa-check"></i>{playlist.name}</div> 
 								: <div id='playlist-option' onClick={e => handleAddToPlaylist(e)} value={playlist.id} key={playlist.id}>{playlist.name}</div> 
-							
-						)) : <Link to='/playlists' >Click Here to go to create a playlist</Link> }
+						)) : <Link id='playlist-option' to='/playlists' >Create a Playlist</Link> }
 					</div>
 				</div>
 				}

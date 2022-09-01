@@ -4,9 +4,15 @@
 }
 
 #playlist-item {
+	display: flex;
+	justify-content: space-between;
 	border: 2px solid black;
 	border-radius: 4px;
 	font-family: "Overpass",sans-serif;
 	font-size: 30px;
 	padding: 8px;
+}
+
+#playlist-list {
+	width: 600px;
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import { getPlaylistThunk } from "../../store/playlist";
 import { getPlaylistSongsThunk, removePlaylistSongThunk } from "../../store/playlistSong";
 import { getSong } from "../../store/song";
@@ -10,8 +10,14 @@ import './PlaylistDetail.css'
 const PlaylistDetail = () => {
 	const { playlistId } = useParams()
 	const dispatch = useDispatch()
+	const history = useHistory()
 	const songs = useSelector(state => state.song)
 	const playlistSongs = useSelector(state => state.playlistSongs)
+	const sessionUser = useSelector(state => state.session.user);
+
+	if (!sessionUser) {
+		history.push('/')
+	}
 
 	// useEffect(() => {
 	// 	dispatch(getPlaylistThunk())

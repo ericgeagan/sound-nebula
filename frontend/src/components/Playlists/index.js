@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useHistory, Link } from "react-router-dom"
 import { addPlaylistThunk, deletePlaylistThunk, getPlaylistThunk } from "../../store/playlist"
 import { getPlaylistSongsThunk } from "../../store/playlistSong"
+import PlaylistDiv from "../PlaylistDiv/playlistdiv"
 import './Playlists.css'
 
 const Playlists = () => {
@@ -12,16 +13,15 @@ const Playlists = () => {
 	const [name, setName] = useState('')
 	const userId = useSelector((state)=> state.session?.user?.id)
 	const playlists = Object.values(useSelector(state => state.playlists))
+	const sessionUser = useSelector(state => state.session.user);
 
+	if (!sessionUser) {
+		history.push('/')
+	}
 	// useEffect(() => {
 	// 	dispatch(getPlaylistThunk())
 	// 	dispatch(getPlaylistSongsThunk())
 	// }, [dispatch])
-
-	const handleDelete = async (e, playlistId) => {
-		e.preventDefault()
-		const response = await dispatch(deletePlaylistThunk(playlistId))
- 	}
 
 	const handleSubmit = e => {
 		e.preventDefault()
@@ -54,22 +54,19 @@ const Playlists = () => {
           ))}
         </ul>
 				<input 
-					placeholder="name"
+					placeholder="Name (Max 24)"
 					type='text'
 					value={name}
 					required={true}
+					maxLength={24}
 					onChange={e => setName(e.target.value)} />
 				<button type='submit'>Add</button>
-				<div id='playlist-list'>
-					{playlists?.map(playlist => (
-						<div key={playlist.id}  id='playlist-item'>
-							<Link to={`/playlists/${playlist.id}`}>{playlist.name}</Link>
-							{/* <div id='playlist-item' key={playlist.id}>{playlist.name}</div> */}
-							<button onClick={e => handleDelete(e, playlist.id)}>delete</button>
-						</div>
-					))}
-				</div>
 			</form>
+			<div id='playlist-list'>
+				{playlists?.map(playlist => (
+					<PlaylistDiv key={playlist.id} playlist={playlist} />
+				))}
+			</div>
 		</div>
 	)
 }

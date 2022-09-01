@@ -57,7 +57,7 @@ const SongDetail = () => {
 					<h1>{song.title}</h1>
 				</div>
 				<div>
-					<PlaylistDropdown songId={song.id} />
+					{userId && <PlaylistDropdown songId={song.id} />}
 				</div>
 				<p>{song.body}</p>
 				<p>Likes: {song.likes}</p>

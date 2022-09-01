@@ -96,6 +96,7 @@ router.delete(
 	})
 )
 
+// Delete playlist (delete all playlistSongs too)
 router.delete(
 	'/:id',
 	requireAuth,
@@ -103,6 +104,16 @@ router.delete(
 		const playlistId = parseInt(req.params.id)
 		const playlist = await Playlist.findByPk(playlistId)
 		if (playlist) {
+			const playlistSongs = await PlaylistSong.findAll({
+				where: {
+					playlistId
+				}
+			})
+			if (playlistSongs.length) {
+				playlistSongs.forEach(playlistSong => {
+					playlistSong.destroy()
+				})
+			}
 			playlist.destroy()
 			res.json({ 'message': 'Delete Successful' })
 		} else {
